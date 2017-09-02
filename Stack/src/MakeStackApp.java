@@ -1,4 +1,19 @@
+/**
+ * Class MakeStackApp
+ * - contains the main method for the Stack module.
+ *
+ * @author Jan Dwyer
+ * @version 1.1     09/02/2017
+ */
 public class MakeStackApp {
+    /**
+     * method main
+     * - test calls each constructor and instantiates a StackLifo object.
+     * - tests push, pop, stackEmpty and getHead methods on an instance
+     *      of the class.
+     *
+     * @param args
+     */
     public static void main(String[] args){
         System.out.println("in MakeStackApp.main");
 

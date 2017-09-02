@@ -1,5 +1,27 @@
 import java.util.ArrayList;
 
+/**
+ * Class StackLifo
+ * - contains Integer variable head to track location of last-in
+ * - contains ArrayList variable to hold elements of the stack.
+ *
+ * - contains two constructors:
+ * - StackLifo() and StackLifo(String element)
+ *
+ * - contains four methods 07/26/2017:
+ * - public void stackPush(String element) to accept a new element
+ *      and add it to the end of the stack.
+ * - public String stackPop() to remove and return an element from the stack.
+ * - public boolean stackEmpty() to return true if stack is empty.
+ * - public Integer getHead() to return the position of the head of the stack.
+ *
+ * - Additions to code should provide error handling.
+ *
+ * @author Jan Dwyer
+ * @version 1.2	09/02/2017
+ *
+ */
+
 public class StackLifo {
     // head is position of last element appended.
     private Integer head;
@@ -17,6 +39,11 @@ public class StackLifo {
         stackPush(element);
     }   // end element constructor.
 
+    /**
+     * method stackPush(String element) accepts a new String element
+     *      and adds it to the head (end) of the stack.
+     * @param element
+     */
     public void stackPush(String element) {
         System.out.println("in StackLifo.stackPush");
         System.out.println("element: " + element);
@@ -31,6 +58,11 @@ public class StackLifo {
         System.out.println();
     }   // end push.
 
+    /**
+     * method stackPop() removes and returns a String element from
+     *      the head (end) of the stack.
+     * @return
+     */
     public String stackPop() {
         System.out.println("in StackLifo.stackPop");
         String item = stackArray.get(head);
@@ -38,10 +70,19 @@ public class StackLifo {
         return item;
     }   // end pop.
 
+    /**
+     * method stackEmpty() returns boolean true if stack is empty.
+     * @return
+     */
     public boolean stackEmpty() {
         return (stackArray.isEmpty());
     }   // end stackEmpty.
 
+    /**
+     * method getHead() returns Integer position of head element
+     *      in the ArrayList stackArray.
+     * @return
+     */
     public Integer getHead() {
         if (stackArray.size() > 0) {
             return head;
