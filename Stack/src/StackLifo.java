@@ -67,6 +67,7 @@ public class StackLifo {
         System.out.println("in StackLifo.stackPop");
         String item = stackArray.get(head);
         stackArray.remove(head);
+        // @TODO decrement the head?
         return item;
     }   // end pop.
 
