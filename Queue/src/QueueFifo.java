@@ -22,7 +22,7 @@ public class QueueFifo {
     }   // end no-args constructor.
 
     // constructor 2 takes a QueueNode object.
-    public QueueFifo(QueueNode node){
+    public QueueFifo(QueueNode node) {
         System.out.println("in QueueFifo constructor - 2");
         System.out.println("node.getPayload(): " + node.getPayload());
         enqueue(node);
@@ -42,13 +42,10 @@ public class QueueFifo {
             head = node;
             tail = node;
         } else {
-            // set newTail to ref for incoming node.
-            // also change existing tail ref to incoming node.
-            QueueNode newTail = new QueueNode();
-            newTail = node;
+            // change existing tail's last to incoming node.
             tail.setLast(node);
             // replace old value of tail with incoming node.
-            tail = newTail;
+            tail = node;
         }   // end if.
         nodeCounter++;
 
@@ -72,17 +69,14 @@ public class QueueFifo {
         System.out.println("head.getPayload(): " + head.getPayload());
         System.out.println("tail.getPayload(): " + tail.getPayload());
         System.out.println("removing head.getPayload(): " + head.getPayload());
-
-        // need placeholder for value of head.last object reference.
-        QueueNode currentHeadLast = new QueueNode();
-        currentHeadLast = head.getLast();
-
-        // re-set new head to the object referenced by the current head.
-        // the instance that is the current head is still out there, but the
-        //      reference to it in the queue will be gone.
-        // the tail of the queue (where new ones are inserted) is untouched
-        //      by the dequeue process.
-        head = currentHeadLast;
+        /*
+        re-set new head to the object referenced by the current head.
+        the instance that is the current head is still out there, but the
+        reference to it in the queue will be gone.
+        the tail of the queue (where new nodes are inserted) is untouched
+        by the dequeue process.
+        */
+        head = head.getLast();
         nodeCounter--;
 
         // debug.
@@ -95,10 +89,38 @@ public class QueueFifo {
     }   // end dequeue.
 
     /**
-     * method queueEmpty returns true when nodeCounter is zero.
+     * method queueEmpty()
+     * - returns true when queue is empty.
      * @return boolean
      */
-    public boolean queueEmpty() {
+     public boolean queueEmpty() {
         return (nodeCounter == 0);
     }   // end queueEmpty.
+
+    /**
+     * method getHead()
+     * - returns current reference to head of queue.
+     * @return QueueNode
+     */
+    public QueueNode getHead() {
+        return head;
+    }
+
+    /**
+     * method getTail()
+     * - returns current reference to tail (entry-point) of queue.
+     * @return QueueNode
+     */
+    public QueueNode getTail() {
+        return tail;
+    }
+
+    /**
+     * method getNodeCounter()
+     * - returns current value of nodeCounter.
+     * @return int
+     */
+    public int getNodeCounter() {
+        return nodeCounter;
+    }
 }       // end class
