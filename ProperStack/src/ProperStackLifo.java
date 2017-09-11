@@ -62,10 +62,19 @@ public class ProperStackLifo {
         // return value is the node that was the previous head.
         System.out.println("payload from node removed and returned: " +
                 currentHead.getPayload());
-        System.out.println("payload from new head: " + head.getPayload());
-
+        if (head != null) {
+            System.out.println("payload from new head: " + head.getPayload());
+        }   // end if.
         nodeCounter--;
         System.out.println("nodeCounter: " + nodeCounter);
         return currentHead;
     }   // end stackPop.
+
+    public int getNodeCounter() {
+        return nodeCounter;
+    }   // end getNodeCounter.
+
+    public StackNode getHead() {
+        return head;
+    }   // end getHead.
 }   // end class.
