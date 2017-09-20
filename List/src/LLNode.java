@@ -6,7 +6,7 @@
  * Each node needs a reference to the next and prior nodes.
  *
  * @author Jan Dwyer
- * @version 1.2	09/11/2017
+ * @version 1.3	09/20/2017
  *
  */
 public class LLNode {
@@ -19,9 +19,6 @@ public class LLNode {
 	  */
 	public LLNode () {
 		payload = "Emerald";
-		// TODO - remove println comments.
-		// System.out.println("in LLNode no-args constructor");
-		// System.out.println("payload: " + payload);
 	}	// end no-args constructor.
 
 	/**
@@ -30,32 +27,53 @@ public class LLNode {
 	 */
 	public LLNode (String data) {
         payload = data;
-        // TODO - remove println comments.
-        // System.out.println("in LLNode one-arg constructor");
-        // System.out.println("payload: " + payload);
     }	// end one-arg constructor.
 
+	/**
+	 * method setPayload
+	 * @param data	String
+	 */
 	public void setPayload(String data) {
 		payload = data;
 	}
 
+	/**
+	 * method getPayload
+	 * @return String
+	 */
 	public String getPayload() {
 		return payload;
 	}
 
-	public void setLast(LLNode node) {
+    /**
+     * method setLast
+     * @param node LLNode
+     */
+    public void setLast(LLNode node) {
 		last = node;
 	}
 
-	public LLNode getLast() {
+    /**
+     * method getLast
+     * @return LLNode
+     */
+    public LLNode getLast() {
 		return last;
 	}
 
-	public void setNext(LLNode node) {
+    /**
+     * method setNext
+     * @param node LLNode
+     */
+    public void setNext(LLNode node) {
 		next = node;
 	}
 
-	public LLNode getNext() {
+    /**
+     * method getNext
+     * @return LLNode
+     */
+    public LLNode getNext() {
 		return next;
 	}
-}		// end class LLNode.
+}	// end class LLNode.

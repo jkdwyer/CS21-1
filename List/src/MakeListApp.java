@@ -4,7 +4,7 @@ import java.util.*;
  * Class MakeList for LinkedList assignment.
  *
  * @author Jan Dwyer
- * @version 1.0	07/26/2017
+ * @version 1.1	09/20/2017
  *
  */
 public class MakeListApp {
@@ -25,14 +25,11 @@ public class MakeListApp {
         String before = "before";
         String after = "after";
 
-        LLNode listNode1;
-        listNode1 = new LLNode();
-        LLNode listNode2;
-        listNode2 = new LLNode("Tourmaline");
-        LLNode listNode3;
-        listNode3 = new LLNode(args[0]);
-        LLNode listNode5;
-        listNode5 = new LLNode("Malachite");
+        LLNode listNode1 = new LLNode();
+        LLNode listNode2 = new LLNode("Tourmaline");
+        LLNode listNode3 = new LLNode(args[0]);
+        LLNode listNode5 = new LLNode();
+        listNode5.setPayload("Malachite");
 
         System.out.println("Type in the value 'Olivine' on the next line:");
         Scanner sc = new Scanner(System.in);
@@ -44,129 +41,54 @@ public class MakeListApp {
 
         DoublyLinkedList dlList = new DoublyLinkedList();
         dlList.insertNewHead(listNode1);
-        // TODO - remove test calls to get head and tail.
-        /*LLNode head = dlList.getHead();
-        LLNode tail = dlList.getTail();
-        // TODO - remove println comments.
-        System.out.println("head.getPayload(): " + head.getPayload());
-        System.out.println("tail.getPayload(): " + tail.getPayload());
-        System.out.println();
-        */
-
         dlList.insertNewHead(listNode2);
-        // TODO - remove test calls to get head and tail.
-        /*head = dlList.getHead();
-        tail = dlList.getTail();
-        // TODO - remove println comments.
-        System.out.println("head.getPayload(): " + head.getPayload());
-        System.out.println("tail.getPayload(): " + tail.getPayload());
-        System.out.println();
-        */
-
         dlList.insertNewHead(listNode3);
-        // TODO - remove test calls to get head and tail.
-        /*head = dlList.getHead();
-        tail = dlList.getTail();
-        // TODO - remove println comments.
-        System.out.println("head.getPayload(): " + head.getPayload());
-        System.out.println("tail.getPayload(): " + tail.getPayload());
-        System.out.println();
-        */
-
         dlList.insertNewHead(listNode4);
-        // TODO - remove test calls to get head and tail.
-        /*head = dlList.getHead();
-        tail = dlList.getTail();
-        // TODO - remove println comments.
-        System.out.println("head.getPayload(): " + head.getPayload());
-        System.out.println("tail.getPayload(): " + tail.getPayload());
-        System.out.println();
-        */
-
         dlList.insertNewHead(listNode5);
-        // TODO - remove test calls to get head and tail.
-        /*head = dlList.getHead();
-        System.out.println("head.getPayload(): " + head.getPayload());
-        tail = dlList.getTail();
-        System.out.println("tail.getPayload(): " + tail.getPayload());
-        System.out.println();
-        */
-
-        // TODO - replace this call with a unit test.
-        // position = dlList.searchByNode(listNode4);
-        // TODO - remove println comments.
-        /*System.out.println("listNode4.getPayload(): " +
-                listNode4.getPayload());
-        System.out.println("listNode4 position: " + position);
-        System.out.println();
-        */
-
-        // TODO - replace this call with a unit test.
-        // position = dlList.searchByNode(listNode1);
-        // TODO - remove println comments.
-        /*System.out.println("listNode1.getPayload(): " +
-                listNode1.getPayload());
-        System.out.println("listNode1 position: " + position);
-        System.out.println();
-        */
-
-        // TODO - replace this call with a unit test.
-        // listNode0 = dlList.searchByPosition(4);
-        // TODO - remove println comments.
-        /*System.out.println("listNode0.getPayload(): " +
-                listNode0.getPayload());
-        */
         dlList.printList();
 
         LLNode listNode6;
         listNode6 = new LLNode("Aquamarine");
-        // TODO - remove println comments.
-        System.out.println("listNode6: Aquamarine before listNode2: Tourmaline");
+        System.out.println("insert L6 Aquamarine before L2 Tourmaline");
         dlList.insertNode(listNode6, listNode2, before);
         dlList.printList();
-        // TODO - remove println comments.
-        System.out.println("head payload: " +
-                dlList.getHead().getPayload());
-        System.out.println("tail payload: " +
-                dlList.getTail().getPayload());
 
         LLNode listNode7;
         listNode7 = new LLNode("Peridot");
-        // TODO - remove println comments.
-        System.out.println("listNode7: Peridot after listNode2: Tourmaline");
+        System.out.println("insert L7 Peridot after L2 Tourmaline");
         dlList.insertNode(listNode7, listNode2, after);
-        // TODO - when neighbor is head or tail, I have a problem.
         dlList.printList();
 
         LLNode listNode8;
         listNode8 = new LLNode("Gaspeite");
-        // TODO - remove println comments.
-        System.out.println("listNode8: Gaspeite, listNode5: Malachite");
-        System.out.println("insert before head");
+        System.out.println("insert L8 Gaspeite before L5 Malachite (head)");
         dlList.insertNode(listNode8, listNode5, before);
         dlList.printList();
 
         LLNode listNode9;
         listNode9 = new LLNode("Amazonite");
-        // TODO - remove println comments.
-        System.out.println("listNode9: Amazonite, listNode1: Emerald");
-        System.out.println("insert after tail");
+        System.out.println("insert L9 Amazonite after L1 Emerald (tail)");
         dlList.insertNode(listNode9, listNode1, after);
         dlList.printList();
 
-        System.out.println("testing deleteNode");
-        System.out.println("delete listNode9: Amazonite (tail)");
+        System.out.println("delete L9 Amazonite (tail)");
         dlList.deleteNode(listNode9);
         dlList.printList();
 
-        System.out.println("delete listNode8: Gaspeite (head)");
+        System.out.println("delete L8 Gaspeite (head)");
         dlList.deleteNode(listNode8);
         dlList.printList();
 
-        System.out.println("delete listNode7: Peridot " +
-                "(from between Tourmaline and Emerald)");
+        System.out.println("delete L7 Peridot (between L2 Tourmaline and L1 Emerald)");
         dlList.deleteNode(listNode7);
         dlList.printList();
+        System.out.println("nodeCounter: " + dlList.getNodeCounter());
+
+        // TODO - do try/catch around a delete on an empty list.
+
+        // test empty list section of insertNode().
+        DoublyLinkedList dlList2 = new DoublyLinkedList();
+        dlList2.insertNode(listNode9, listNode1, after);
 
         sc.close();
     }	// end method main.

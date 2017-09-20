@@ -3,7 +3,7 @@
  * - contains references to LLNode objects at head and tail of List.
  *
  * @author Jan Dwyer
- * @version 1.0     09/11/2017
+ * @version 1.1     09/20/2017
  */
 public class DoublyLinkedList {
     private LLNode head;
@@ -12,66 +12,48 @@ public class DoublyLinkedList {
 
     // no-args constructor.
     public DoublyLinkedList() {
-        // TODO - remove println comments.
-        // System.out.println("in DoublyLinkedList constructor");
-        // System.out.println("nodeCounter: " + nodeCounter);
     }   // end constructor.
 
     /**
      * method printList
-     * - prints entire contents of current list, one line
-     *      per element.
+     * - prints entire contents of current list, one line per element.
      */
     public void printList() {
-        // TODO - remove println comments.
         System.out.println("");
-        System.out.println("in printList");
-        int counter = 1;
+        int ct = 1;
         LLNode node;
         if (!listEmpty()) {
-            while (counter <= nodeCounter) {
-                node = searchByPosition(counter);
-                // TODO - remove println comments.
-                System.out.println("counter: " + counter +
-                    " - payload: " + node.getPayload());
-                counter++;
-            }
-        }
+            while (ct <= nodeCounter) {
+                node = searchByPosition(ct);
+                System.out.println("ct: "+ ct + " - payload: " + node.getPayload());
+                ct++;
+            }   // end while.
+        }   // end if.
         System.out.println("");
     }   // end printList.
 
     /**
      * method insertNode
      * - accepts new LLNode, neighbor LLNode, and before/after value.
-     * - locates the neighbor LLNode by calling searchByNode, then
-     *      adds the new node before or after the neighbor as specified.
+     * - adds the new node before or after the neighbor as specified.
      * @param node LLNode
      * @param neighbor LLNode
      * @param ba String
      */
     public void insertNode(LLNode node, LLNode neighbor, String ba) {
-        // TODO - remove println comments.
-        System.out.println("in DoublyLinkedList.insertNode()");
-        LLNode partner;
+        LLNode neighborLast;
+        LLNode neighborNext;
         if (nodeCounter == 0) {
             // list was empty, new node becomes head and tail.
             head = node;
             tail = node;
         } else {
-            // search for neighbor node.
-            int position = searchByNode(neighbor);
-            // TODO - remove println comments.
-            // System.out.println("position: " + position);
             if (ba == "before") {
-                position--;
-                // TODO - remove println comments.
-                // System.out.println("position (before): " + position);
                 if (neighbor != head) {
-                    partner = searchByPosition(position);
-                    // now I have neighbor and partner; do insert logic.
-                    node.setLast(partner);
-                    partner.setNext(node);
                     node.setNext(neighbor);
+                    neighborLast = neighbor.getLast();
+                    node.setLast(neighborLast);
+                    neighborLast.setNext(node);
                     neighbor.setLast(node);
                 } else {
                     // there is no before-partner when neighbor is head.
@@ -81,16 +63,12 @@ public class DoublyLinkedList {
                     head = node;
                 }   // end if.
             } else {    // after.
-                position++;
-                // TODO - remove println comments.
-                // System.out.println("position (after): " + position);
                 if (neighbor != tail) {
-                    partner = searchByPosition(position);
-                    // now I have neighbor and partner; do insert logic.
-                    node.setNext(partner);
-                    partner.setLast(node);
                     node.setLast(neighbor);
+                    neighborNext = neighbor.getNext();
+                    node.setNext(neighborNext);
                     neighbor.setNext(node);
+                    neighborNext.setLast(node);
                 } else {
                     // there is no after-partner when neighbor is tail.
                     node.setLast(neighbor);
@@ -111,8 +89,6 @@ public class DoublyLinkedList {
      * @param node LLNode
      */
     public void insertNewHead (LLNode node) {
-        // TODO - remove println comments.
-        // System.out.println("in DoublyLinkedList.insertNewHead()");
         if (nodeCounter == 0) {
             head = node;
             tail = node;
@@ -126,8 +102,6 @@ public class DoublyLinkedList {
             head = node;
         }   // end if.
         nodeCounter++;
-        // TODO - remove println comments.
-        // System.out.println("nodeCounter: " + nodeCounter);
     }   // end insertNewHead.
 
     /**
@@ -138,34 +112,28 @@ public class DoublyLinkedList {
      * @return
      */
     public void deleteNode(LLNode node) {
-        // TODO - remove println comments.
-        System.out.println("in DoublyLinkedList.deleteNode()");
-        int position = 0;
         LLNode neighbor;
+        LLNode beforeNode;
+        LLNode afterNode;
         if (!listEmpty()) {
             if (node == head) {
-                // head is position 1, next is position 2.
-                neighbor = searchByPosition(2);
+                neighbor = node.getNext();
                 // this removes ref to current head.
                 neighbor.setLast(null);
                 // neighbor becomes the new head.
                 head = neighbor;
             } else if (node == tail) {
-                // tail is position nodeCounter.
-                position = (nodeCounter - 1);
-                neighbor = searchByPosition(position);
+                neighbor = node.getLast();
                 // this removes ref to current tail.
                 neighbor.setNext(null);
                 // neighbor becomes the new tail.
                 tail = neighbor;
             } else {
-                position = searchByNode(node);
-                int b = position--;
-                int a = position++;
-                LLNode before = searchByPosition(b);
-                LLNode after = searchByPosition(a);
-                before.setNext(after);
-                after.setLast(before);
+                beforeNode = node.getLast();
+                afterNode = node.getNext();
+                // this removes node from the list.
+                beforeNode.setNext(afterNode);
+                afterNode.setLast(beforeNode);
             }   // end conditions.
             // reduce the node count in the list.
             nodeCounter--;
@@ -183,27 +151,17 @@ public class DoublyLinkedList {
      * @return position     int
      */
     public int searchByNode(LLNode node) {
-        // TODO - remove println comments.
-        System.out.println("in DoublyLinkedList.searchByNode()");
         int position = -1;      // initialize to a non-position value.
         int compareCounter = 1;
         LLNode compareNode = head;
         boolean match = false;
 
         if (!listEmpty()) {
-            // System.out.println("list is not empty");
             while ((compareNode != tail) && (!match)){
-                // TODO - remove println comments.
-                System.out.println("(while loop) compareCounter: " +
-                        compareCounter + " " + compareNode.getPayload());
                 if (compareNode == node) {
-                    // TODO - remove println comments.
-                    // System.out.println("compareNode == node");
                     match = true;
                     position = compareCounter;
                 } else {
-                    // TODO - remove println comments.
-                    // System.out.println("in else");
                     LLNode next = compareNode.getNext();
                     compareNode = next;
                     compareCounter++;
@@ -227,8 +185,6 @@ public class DoublyLinkedList {
      * @return LLNode node
      */
     public LLNode searchByPosition(int pos) {
-        // TODO - remove println comments.
-        // System.out.println("in searchByPosition - pos: " + pos);
         LLNode node = null;
         int counter = 1;
         boolean match = false;
@@ -237,12 +193,8 @@ public class DoublyLinkedList {
             node = head;
             while ((counter <= nodeCounter) && (!match)) {
                 if (pos == counter) {
-                    // TODO - remove println comments.
-                    // System.out.println("pos == counter");
                     match = true;
                 } else {
-                    // TODO - remove println comments.
-                    // System.out.println("else");
                     LLNode next = node.getNext();
                     node = next;
                     counter++;
