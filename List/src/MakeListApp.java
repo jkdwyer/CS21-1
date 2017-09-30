@@ -14,16 +14,12 @@ public class MakeListApp {
      * Primarily for testing.
      */
     public static void main(String[] args){
-        // TODO - remove println comments.
-        System.out.println("in MakeListApp.main");
-        // So, using IJ, how do I provide cmd line args?
-        // Edit Configs screen for args.  How about System.in?
-        // System.out.println("args[0]: " + args[0]);
+        // System.out.println("in MakeListApp.main");
 
+        String after = "after";
+        String before = "before";
         int position = 0;
         LLNode listNode0;
-        String before = "before";
-        String after = "after";
 
         LLNode listNode1 = new LLNode();
         LLNode listNode2 = new LLNode("Tourmaline");
@@ -67,6 +63,7 @@ public class MakeListApp {
 
         LLNode listNode9;
         listNode9 = new LLNode("Amazonite");
+
         System.out.println("insert L9 Amazonite after L1 Emerald (tail)");
         dlList.insertNode(listNode9, listNode1, after);
         dlList.printList();
@@ -84,12 +81,22 @@ public class MakeListApp {
         dlList.printList();
         System.out.println("nodeCounter: " + dlList.getNodeCounter());
 
-        // TODO - do try/catch around a delete on an empty list.
+        DoublyLinkedList dlList2 = new DoublyLinkedList();
+        try {
+            // No exception generated, code silently skips request.
+            dlList2.deleteNode(listNode1);
+        } catch (Exception e) {
+            System.out.println("deleting node from empty list");
+            e.printStackTrace();
+        }   // end try.
 
         // test empty list section of insertNode().
-        DoublyLinkedList dlList2 = new DoublyLinkedList();
         dlList2.insertNode(listNode9, listNode1, after);
+        // modified to createPrintList() to state "List is empty" and it is.
+        int count = dlList2.getNodeCounter();
+        System.out.println("count: " + count);
+        dlList2.printList();
 
-        sc.close();
+        // sc.close();
     }	// end method main.
 }       // end class MakeListApp.

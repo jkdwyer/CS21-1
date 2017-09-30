@@ -37,7 +37,33 @@ public class DoublyLinkedListTest extends TestCase {
     }
 
     public void testPrintList() throws Exception {
-        // How do I test this method?
+        // Can verify that the call produces the expected string
+        //  but I've done that below in testCreatePrintList.
+    }
+
+    public void testCreatePrintList() throws Exception {
+        // start fresh list per test.
+        DoublyLinkedList dlList = new DoublyLinkedList();
+        dlList.insertNewHead(listNode1);    // tail.
+        dlList.insertNewHead(listNode2);
+        dlList.insertNewHead(listNode3);
+        dlList.insertNewHead(listNode4);
+        dlList.insertNewHead(listNode5);    // last inserted is head.
+        StringBuffer actualList = new StringBuffer();
+        actualList.append("\n");
+        actualList.append("ct: 1 - payload: Malachite");
+        actualList.append("\n");
+        actualList.append("ct: 2 - payload: Olivine");
+        actualList.append("\n");
+        actualList.append("ct: 3 - payload: Jade");
+        actualList.append("\n");
+        actualList.append("ct: 4 - payload: Tourmaline");
+        actualList.append("\n");
+        actualList.append("ct: 5 - payload: Emerald");
+        actualList.append("\n");
+        actualList.append("\n");
+        StringBuffer returnedList = dlList.createPrintList();
+        assertTrue(returnedList.toString().equals(actualList.toString()));
     }
 
     public void testInsertNodeListEmpty() throws Exception {
@@ -46,6 +72,7 @@ public class DoublyLinkedListTest extends TestCase {
         dlList2.insertNode(listNode9, listNode1, after);
         assertEquals(dlList2.getHead(), listNode9);
         assertEquals(dlList2.getTail(), listNode9);
+        assertEquals(dlList2.getNodeCounter(), 1);
     }
 
     public void testInsertNodeBeforeHead() throws Exception {

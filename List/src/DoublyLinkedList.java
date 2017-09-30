@@ -19,17 +19,33 @@ public class DoublyLinkedList {
      * - prints entire contents of current list, one line per element.
      */
     public void printList() {
-        System.out.println("");
+        StringBuffer list = createPrintList();
+        System.out.println(list);
+    }   // end printList.
+
+    /**
+     * method createPrintList
+     * - creates and returns a StringBuffer object containing the print string:
+     *      the entire contents of current list, one line per element.
+     * @return printString      StringBuffer
+     */
+    public StringBuffer createPrintList() {
+        StringBuffer printString = new StringBuffer();
         int ct = 1;
         LLNode node;
+        printString.append("\n");
         if (!listEmpty()) {
             while (ct <= nodeCounter) {
                 node = searchByPosition(ct);
-                System.out.println("ct: "+ ct + " - payload: " + node.getPayload());
+                printString.append("ct: " + ct + " - payload: " + node.getPayload());
+                printString.append("\n");
                 ct++;
             }   // end while.
-        }   // end if.
-        System.out.println("");
+        } else {
+            printString.append("List is empty");
+        }   // end if/else.
+        printString.append("\n");
+        return printString;
     }   // end printList.
 
     /**
@@ -77,8 +93,8 @@ public class DoublyLinkedList {
                     tail = node;
                 }   // end if.
             }   // end before or after.
-            nodeCounter++;
         }   // end if.
+        nodeCounter++;
     }   // end insertNode.
 
     /**
