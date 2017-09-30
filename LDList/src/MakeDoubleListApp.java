@@ -79,6 +79,7 @@ public class MakeDoubleListApp {
         dblList.printList();
 
         // Third block:  format to 3 dec places, then write to text file.
+        /*
         try {
             outputFile = new File("DblsToThreeDec.txt");
             fwOutput = new FileWriter(outputFile, true);
@@ -105,6 +106,12 @@ public class MakeDoubleListApp {
             System.out.println("\nError encountered in write");
             e.printStackTrace();
         }   // end try
+        */
+
+        // Block 3 - test output of call:
+        String filename = "listOfDoubles.txt";
+        writeDoublesToFile(dblList, filename);
+        // need to check the contents of the created file to verify.
 
     }   // end main.
 
@@ -153,17 +160,17 @@ public class MakeDoubleListApp {
     public static LinkedDoublesList readDoublesFromFile(String filename) {
         System.out.println("in readDoublesFromFile() - filename: " + filename);
 
+        LinkedDoublesList dblList = new LinkedDoublesList();
         Double dbl = 0.0;
         int wct = 0;
         String after = "after";
         String before = "before";
-        LinkedDoublesList dblList = new LinkedDoublesList();
+
         Scanner fileIn;
         File dblFile;
         FileReader frInput;
         BufferedReader bufInput;
 
-        // Second block:  make a list from doubles in text file.
         try {
             dblFile = new File(filename);
             if (dblFile.exists()) {
@@ -198,9 +205,52 @@ public class MakeDoubleListApp {
         return dblList;
     }   // end readDoublesFromFile
 
-    public static File writeDoublesToFile(LinkedDoublesList ldl) {
-        System.out.println("in writeDoublesToFile()");
-        File newFile = new File("listOfDoubles.txt");
-        return newFile;
+    /**
+     * writeDoublesToFile() static method
+     * - Format doubles to 3 dec places, then write to text file,
+     *      one per line.
+     * @param ldl           - LinkedDoublesList
+     * @return dblOut       - reference to a PrintWriter object.
+     */
+    public static void writeDoublesToFile(LinkedDoublesList ldl, String fileName) {
+        System.out.println("in writeDoublesToFile() - fileName: " + fileName);
+
+        int nct = 0;
+        LLDoubleNode dNode;
+        Double dPayload = 0.0;
+
+        File outputFile;
+        FileWriter fwOutput;
+        BufferedWriter bufOutput;
+        PrintWriter dblOut;
+
+        try {
+            outputFile = new File(fileName);
+            fwOutput = new FileWriter(outputFile, true);
+            bufOutput = new BufferedWriter(fwOutput);
+            dblOut = new PrintWriter(bufOutput);
+            NumberFormat nf = NumberFormat.getInstance();
+            nf.setMaximumFractionDigits(3);
+            nf.setMinimumFractionDigits(3);
+            String strPayload;
+
+            // loop over dblList and add each payload to output file.
+            nct = ldl.getNodeCounter();
+            dNode = ldl.getHead();
+            for (int j = 0; j < nct; j++) {
+                dPayload = dNode.getPayload();
+                strPayload = nf.format(dPayload);
+                // TODO - remove this output.
+                // System.out.println(strPayload);
+                dblOut.println(strPayload);
+                dNode = dNode.getNext();
+            }   // end for loop
+            dblOut.close();
+
+        } catch (Exception e){
+            System.out.println("\nError encountered in write");
+            e.printStackTrace();
+        }   // end try
+        // Can't return the PrintWriter object, it's closed.
     }   // end writeDoublesToFile
 }       // end MakeDoubleListApp class
